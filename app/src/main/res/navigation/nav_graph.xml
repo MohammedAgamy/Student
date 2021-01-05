@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.com.student.fragment.homeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_bookFragment"
+            app:destination="@id/bookFragment"
+            app:exitAnim="@anim/anim_fate_out"
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slideout"
+            app:popExitAnim="@anim/fadein"/>
+    </fragment>
+    <fragment
+        android:id="@+id/bookFragment"
+        android:name="com.com.student.fragment.bookFragment"
+        android:label="fragment_book"
+        tools:layout="@layout/fragment_book" >
+        <action
+            android:id="@+id/action_bookFragment_to_quizFragment"
+            app:destination="@id/quizFragment"
+            app:exitAnim="@anim/anim_fate_out"
+            app:enterAnim="@anim/slide_in"
+            app:popEnterAnim="@anim/slideout"
+            app:popExitAnim="@anim/fadein"/>
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.com.student.fragment.quizFragment"
+        android:label="fragment_quiz"
+        tools:layout="@layout/fragment_quiz" />
+</navigation>

@@ -3,13 +3,10 @@ package com.com.student.SplashScreen;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.com.student.MainActivity;
 import com.com.student.R;
 
 public class SplashScreen extends AppCompatActivity {

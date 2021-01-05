@@ -34,14 +34,33 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.firebase:firebase-auth:20.0.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+
 
     //firebase
     implementation platform('com.google.firebase:firebase-bom:26.2.0')
 
     // Anamation Lottio
-    implementation 'com.airbnb.android:lottie:3.6.0'
+    implementation "com.airbnb.android:lottie:3.4.0"
+
+    //Button meow Navigation
+    implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'
+    implementation "androidx.navigation:navigation-fragment:2.3.1"
+    implementation "androidx.navigation:navigation-ui:2.3.1"
+
+    //navDrawer
+    implementation "androidx.drawerlayout:drawerlayout:1.1.1"
+
+    //circle image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
+
+
 }
 apply plugin: 'com.google.gms.google-services'

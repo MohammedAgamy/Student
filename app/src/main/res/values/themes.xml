@@ -23,7 +23,14 @@
         <item name="colorOnPrimary">@color/white</item>
 
 
-
-
     </style>
+
+    <style name="Theme.Student.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Student.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Student.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

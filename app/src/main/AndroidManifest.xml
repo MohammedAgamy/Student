@@ -9,21 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Student">
-        <activity android:name=".SplashScreen.LognActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SplashScreen.SplashScreen"
+        <activity
+            android:name=".SplashScreen.LognActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashScreen.SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait">
-
-
-        </activity>
+        <activity
+            android:name=".Home.MainActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
