@@ -25,12 +25,12 @@
                 android:id="@+id/lottie"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_marginTop="68dp"
+                android:layout_marginTop="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
                 app:lottie_autoPlay="true"
-                app:lottie_rawRes="@raw/login"/>
+                app:lottie_rawRes="@raw/login" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="90dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Email"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,8 +62,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                     />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -92,7 +91,7 @@
                 android:id="@+id/btn_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="60dp"
                 android:elevation="10dp"
                 android:text="Login"
                 android:textColor="@color/white"
