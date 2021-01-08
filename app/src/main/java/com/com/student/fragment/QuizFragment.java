@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 import com.com.student.R;
 
-public class quizFragment extends Fragment {
+public class QuizFragment extends Fragment {
 
 
-    public quizFragment() {
+    public QuizFragment() {
         // Required empty public constructor
     }
 

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.com.student.R;
 
-public class homeFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
 
 

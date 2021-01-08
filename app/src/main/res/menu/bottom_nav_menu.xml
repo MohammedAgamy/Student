@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/home"
+        />
+
+    <item
+        android:id="@+id/bottom_book"
+        android:icon="@drawable/ic_book_24"
+        android:title="@string/book" />
+
+    <item
+        android:id="@+id/bottom_quaiz"
+        android:icon="@drawable/ic_baseline_format"
+        android:title="@string/quaiz"
+        />
+
+</menu>

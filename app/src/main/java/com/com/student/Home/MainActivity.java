@@ -1,84 +1,149 @@
 package com.com.student.Home;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.com.student.Activity.PostsActivity;
 import com.com.student.R;
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.com.student.fragment.HomeFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    //Meow Bottom  filed
-    MeowBottomNavigation mMeowNavigation;
+
+    private static final float END_SCALE = 0.85f;
+    private AppBarConfiguration mAppBarConfiguration;
+    private NavController navController;
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
+    private BottomNavigationView bottomNavView;
+    private CoordinatorLayout contentView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // hi hamo
-        //Hi My Friend...to day is 5/1/20 i will set add meow button nav an navDrawer and fragment home & book & quiz
-        iniView(); ///find filed view
-        addMeowNav(); // add button nav
 
+
+        initToolbar();
+        initNavigation();
     }
+        private void initToolbar () {
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
+
+        }
 
 
-    //Start find View filed ....
-    private void iniView() {
-        mMeowNavigation = findViewById(R.id.meow_bottom);
-    }//end find View filed ..
+        private void initNavigation() {
+
+            drawer = findViewById(R.id.drawer_layout);
+            navigationView = findViewById(R.id.nav_view);
+            bottomNavView = findViewById(R.id.bottom_nav_view);
+            contentView = findViewById(R.id.content_view);
 
 
-    //Start add meow
-    //her ypu will find button nav in cntroal it
-    private void addMeowNav() {
+            mAppBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.nav_home,
+                    R.id.nav_share, R.id.nav_send,
+                    R.id.bottom_home, R.id.bottom_book, R.id.bottom_quaiz)
+                    .setDrawerLayout(drawer)
+                    .build();
+            navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+            NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 
-        //الكود يستخد للتحكم ف الفريجمنت والانتقال فيما بينهم
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_contr);
-        NavController navController = navHostFragment.getNavController();
-
-        //add nav and give id and icon
-        mMeowNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.homestudent));
-        mMeowNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.openbook));
-        mMeowNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.educationquiz));
+            NavigationUI.setupWithNavController(navigationView, navController);
+            NavigationUI.setupWithNavController(bottomNavView, navController);
 
 
-        //on click in item
-        mMeowNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
-            @Override
-            public void onClickItem(MeowBottomNavigation.Model item) {
-                switch (item.getId()) {
-                    case 1 :
-                        navController.navigate(R.id.homeFragment);
-                        break;
-                    case 2 :
-                        navController.navigate(R.id.bookFragment);
-                        break;
-                    case 3 :
-                        navController.navigate(R.id.quizFragment);
-                        break;
+            animateNavigationDrawer();
+
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.home:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
+                                    new HomeFragment()).commit();
+
+                        case R.id.nav_share:
+                            Toast.makeText(MainActivity.this, "share", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.nav_post:
+                            Intent intent=new Intent(MainActivity.this, PostsActivity.class);
+                            startActivity(intent);
+                            Toast.makeText(MainActivity.this, "posts", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                    drawer.closeDrawer(GravityCompat.START);
+                    return true;
                 }
+            });
+        }
+
+
+        private void animateNavigationDrawer() {
+
+            drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+                @Override
+                public void onDrawerSlide(View drawerView, float slideOffset) {
+
+                    // Scale the View based on current slide offset
+                    final float diffScaledOffset = slideOffset * (1 - END_SCALE);
+                    final float offsetScale = 1 - diffScaledOffset;
+                    contentView.setScaleX(offsetScale);
+                    contentView.setScaleY(offsetScale);
+
+                    // Translate the View, accounting for the scaled width
+                    final float xOffset = drawerView.getWidth() * slideOffset;
+                    final float xOffsetDiff = contentView.getWidth() * diffScaledOffset / 2;
+                    final float xTranslation = xOffset - xOffsetDiff;
+                    contentView.setTranslationX(xTranslation);
+                }
+            });
+        }
+
+
+
+
+        @Override
+        public boolean onSupportNavigateUp() {
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+            return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                    || super.onSupportNavigateUp();
+        }
+
+
+        @Override
+        public void onBackPressed() {
+
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
             }
-        });
 
-        //show bottom nav
-        mMeowNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
-            @Override
-            public void onShowItem(MeowBottomNavigation.Model item) {
+        }
 
-            }
-        });
-    }//end add meow
-
-
-  // method to finish app.............
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
     }
-}
+
+

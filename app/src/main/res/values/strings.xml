@@ -14,4 +14,9 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="home">Home</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="book">Book</string>
+    <string name="quaiz">Quaiz</string>
+    <string name="posts">posts</string>
 </resources>
