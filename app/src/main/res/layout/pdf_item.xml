@@ -14,9 +14,9 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:background="#FCE0E0"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_width="180dp"
+            android:layout_height="230dp"
             android:id="@+id/IV"
             android:src="@drawable/aa"/>
 
