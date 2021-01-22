@@ -55,8 +55,8 @@ public class Pdf_Fragment extends Fragment {
                 progressBar.setVisibility(View.GONE);
             }
         });
-         webView.loadUrl("https://docs.google.com/gview?embedded=true&url="+ BookFragment.list.get(position).getPdfUrl());
-      //  webView.loadUrl("https://docs.google.com/viewerng/viewer?embedded=true&url=" + url);
+      //   webView.loadUrl("https://docs.google.com/gview?embedded=true&url="+ BookFragment.list.get(position).getPdfUrl());
+        webView.loadUrl("https://docs.google.com/viewerng/viewer?embedded=true&url=" + url);
       //  webView.loadUrl("https://docs.google.com/viewerng/viewer?embedded=true&url=");
       //  webView.loadUrl(url);
     }
