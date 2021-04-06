@@ -5,10 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.Student"
+    android:id="@+id/cont"
     tools:context=".Activity.PostsActivity">
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
+    </androidx.viewpager.widget.ViewPager>
+    <!--  start Toolbar -->
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
@@ -24,7 +36,52 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout> <!--  end Toolbar -->
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@style/Theme.Student"
+            tools:context=".Activity.PostsActivity">
+
+            <!-- start edit text to post and btn  -->
+            <RelativeLayout
+                android:id="@+id/relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+               app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent">
+                <include
+                    layout="@layout/layout_post"
+                    />
+            </RelativeLayout>    <!-- end edit text to post and btn  -->
+
+            <!-- start recycler post  -->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_post"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                app:layout_constraintTop_toBottomOf="@id/relative"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />  <!-- end recycler post  -->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
 
 
 

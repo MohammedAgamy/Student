@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.com.student.Home.MainActivity;
+import com.com.student.Model.ModelSaveData;
 import com.com.student.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,30 +21,36 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LognActivity extends AppCompatActivity {
+
+    //find filed view..
     LottieAnimationView lottieAnimationView;
-    private EditText edt_email, edt_password;
-    private FirebaseAuth firebaseAuth;
+    private EditText edt_email, edt_password ,mEdit_Name;
     private ProgressBar progressBar;
     private Button btn_login;
+    //save_data
+    ModelSaveData data_student;
+    //firebase
+    private FirebaseAuth firebaseAuth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logn);
 
 
-
         edt_email = findViewById(R.id.edt_email);
         edt_password = findViewById(R.id.edt_Password);
         btn_login = findViewById(R.id.btn_login);
         progressBar = findViewById(R.id.progressBar);
+        mEdit_Name=findViewById(R.id.edt_name);
 
         //  Add Anmation
-        lottieAnimationView =findViewById(R.id.lottie);
+        lottieAnimationView = findViewById(R.id.lottie);
         lottieAnimationView.animate();
 
-
-
-        //  Login
+        //Save Data
+        ModelSaveData saveData=new ModelSaveData(this);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -54,6 +61,8 @@ public class LognActivity extends AppCompatActivity {
 
             return;
         }
+
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,10 +79,15 @@ public class LognActivity extends AppCompatActivity {
                     edt_password.setError(null);
                 }
                 progressBar.setVisibility(View.VISIBLE);
-                firebaseAuth.signInWithEmailAndPassword(edt_email.getText().toString(), edt_password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                String Name=mEdit_Name.getText().toString();
+                String Email=edt_email.getText().toString();
+                String Password=edt_password.getText().toString();
+                firebaseAuth.signInWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            String UserID=task.getResult().getUser().getUid();
+                            saveData.SaveData(Name,Email,UserID);
                             startActivity(intent);
                             finish();
                             Toast.makeText(LognActivity.this, "success", Toast.LENGTH_SHORT).show();
@@ -85,6 +99,17 @@ public class LognActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+
+    //method to save data
+    private void SaveData() {
+        String Name = edt_email.getText().toString();
+        String phone = edt_password.getText().toString();
+        //save in model
+
+
+        //save in firebase
     }
 
 }
