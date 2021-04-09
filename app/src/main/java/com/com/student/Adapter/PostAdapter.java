@@ -69,17 +69,15 @@ public class PostAdapter extends FirestoreRecyclerAdapter<PostModel, PostAdapter
             @Override
             public void onClick(View view) {
                 Log.d(TAG, String.valueOf(model.getPost_id()));
-
-
                 onClick.OnIttemClick(model.getPost_id());
             }
 
-
         });
 
-        /**
-         * btn like
-         */
+
+    /**
+     * btn like
+     */
         holder.btn_Like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +103,7 @@ public class PostAdapter extends FirestoreRecyclerAdapter<PostModel, PostAdapter
     class item_post extends RecyclerView.ViewHolder {
         CircleImageView mImage;
         TextView mName, mTime, mPost, mCounter;
-        ImageView btn_Comment ,btn_Like ,btn_Like_red;
+        ImageView btn_Comment ,btn_Like ,btn_Like_red ,btn_CommentAdmin ;
 
         public item_post(@NonNull View itemView) {
             super(itemView);
@@ -118,7 +116,6 @@ public class PostAdapter extends FirestoreRecyclerAdapter<PostModel, PostAdapter
             mPost = itemView.findViewById(R.id.post);
             mCounter = itemView.findViewById(R.id.Counter);
             btn_Comment = itemView.findViewById(R.id.comment);
-
         }
     }
 
@@ -127,5 +124,9 @@ public class PostAdapter extends FirestoreRecyclerAdapter<PostModel, PostAdapter
     }
     public interface OnClick_Like {
         void OnIttemClick_Like(long click_Like, int count);
+    }
+
+    public interface OnClick_Admin {
+        void OnIttemClickAdmin(String click);
     }
 }

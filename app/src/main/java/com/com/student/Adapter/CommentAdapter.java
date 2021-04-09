@@ -1,8 +1,10 @@
 package com.com.student.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,6 +52,7 @@ public class CommentAdapter extends FirestoreRecyclerAdapter<CommentModel, Comme
     class item_Comment extends RecyclerView.ViewHolder {
         CircleImageView mImage;
         TextView mName, mTime, mPost ;
+
 
 
         public item_Comment(@NonNull View itemView) {

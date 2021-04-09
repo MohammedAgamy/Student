@@ -1,5 +1,6 @@
 package com.com.student.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.com.student.Activity.PostsActivity;
 import com.com.student.Adapter.CommentAdapter;
 import com.com.student.Adapter.PostAdapter;
+import com.com.student.Home.MainActivity;
 import com.com.student.Model.CommentModel;
 import com.com.student.Model.ModelSaveData;
 import com.com.student.Model.PostModel;
@@ -66,6 +68,7 @@ public class Comment extends Fragment  implements View.OnClickListener  {
 
         Bundle bundle = getArguments();
         id = String.valueOf(bundle.getLong("post_id"));
+        Toast.makeText(getActivity(), id, Toast.LENGTH_SHORT).show();
 
 
 
@@ -182,7 +185,10 @@ public class Comment extends Fragment  implements View.OnClickListener  {
         mAdapter.stopListening();
     }
 
-
-
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        startActivity(new Intent(getActivity() ,PostsActivity.class));
+        getActivity().finish();
+    }
 }

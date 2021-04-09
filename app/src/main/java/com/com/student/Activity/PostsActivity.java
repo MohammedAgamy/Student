@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.com.student.Adapter.PostAdapter;
+import com.com.student.Home.MainActivity;
 import com.com.student.Model.ModelSaveData;
 import com.com.student.Model.PostModel;
 import com.com.student.R;
@@ -219,8 +221,15 @@ public class PostsActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void OnIttemClick_Like(long click_Like, int count) {
-        Toast.makeText(this, String.valueOf(count), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, String.valueOf(count), Toast.LENGTH_SHORT).show();
         counter = String.valueOf(count);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(PostsActivity.this,MainActivity.class));
+        finish();
     }
 }
