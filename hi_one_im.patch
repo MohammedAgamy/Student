@@ -1,0 +1,16 @@
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision b98360c717079003b3da4d866398fe2bec5818f6)
++++ app/src/main/res/layout/activity_main.xml	(date 1609793736461)
+@@ -19,7 +19,7 @@
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:text="Hello Agamy test project!"
++        android:text="Hello  test project!"
+         android:textSize="40sp"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintLeft_toLeftOf="parent"
