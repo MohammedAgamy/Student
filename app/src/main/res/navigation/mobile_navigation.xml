@@ -22,9 +22,9 @@
 
     <fragment
         android:id="@+id/bottom_quaiz"
-        android:name="com.com.student.fragment.QuizFragment"
+        android:name="com.com.student.fragment.LessonFragment"
         android:label="@string/quaiz"
-        tools:layout="@layout/fragment_quiz" />
+        tools:layout="@layout/fragment_lesson" />
 
     <fragment
         android:id="@+id/bottom_book"

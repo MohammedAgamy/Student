@@ -77,7 +77,7 @@ public class PostAdapter extends FirestoreRecyclerAdapter<PostModel, PostAdapter
 
         });
 
-        /**
+        /*
          * btn like
          */
         holder.btn_Like.setOnClickListener(new View.OnClickListener() {

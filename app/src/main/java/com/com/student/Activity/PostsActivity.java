@@ -214,6 +214,8 @@ public class PostsActivity extends AppCompatActivity implements View.OnClickList
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.cont, fragment);
         ft.commit();
+
+        
     }
 
 
