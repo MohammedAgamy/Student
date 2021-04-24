@@ -6,7 +6,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.animation.Animator;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 
 import com.com.student.Model.QuestionModel;
 import com.com.student.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,12 +31,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class QueizActivity extends AppCompatActivity {
-    private int setNo;
+    private SharedPreferences sharedPreferences;
     private int count = 0;
     private int score = 0;
     private int postion = 0;
@@ -44,15 +50,19 @@ public class QueizActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     private List<QuestionModel> list;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quaiz_lesson);
-        Intent intent =getIntent();
-            //  setNo = getIntent().getIntExtra("setNo", 0);
-           String titleQuaiz =intent.getStringExtra("title");
+        Intent intent = getIntent();
 
+        String titleQuaiz = intent.getStringExtra("title");
+
+
+        sharedPreferences = getSharedPreferences("SHARD_PRE",MODE_PRIVATE);
+        name = sharedPreferences.getString("Name", null);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -71,7 +81,6 @@ public class QueizActivity extends AppCompatActivity {
 
         list = new ArrayList<>();
         myRef.child("SETS").child(titleQuaiz).child("questions")
-                //.orderByChild("setNo").equalTo(setNo)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -96,10 +105,23 @@ public class QueizActivity extends AppCompatActivity {
                                     Intent scoreIntent = new Intent(getApplicationContext(), ScoreActivity.class);
                                     scoreIntent.putExtra("score", score);
                                     scoreIntent.putExtra("total", list.size());
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+                                    HashMap<Object, Object> map = new HashMap<>();
+                                    map.put("name", name);
+                                    map.put("total", list.size());
+                                    map.put("score", score);
+
+                                    database.getReference().child("score")
+                                            .child("titleLesson")
+                                            .child(titleQuaiz)
+                                            .setValue(map);
+
                                     startActivity(scoreIntent);
                                     finish();
                                     return;
                                 }
+
 
                                 count = 0;
                                 playAnim(question, 0, list.get(postion).getQuestion());

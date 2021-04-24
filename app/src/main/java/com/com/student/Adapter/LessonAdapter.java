@@ -18,8 +18,6 @@ import java.util.List;
 
 
 public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.MyViewHolder> {
-
-
     private List<LessonModel> lessonModels;
     private ItemLessonListener itemLessonListener;
 
@@ -40,8 +38,6 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Picasso.get().load(lessonModels.get(position).getImageLesson())
-                .into(holder.imageView);
         holder.txt_nameCourse.setText(lessonModels.get(position).getNameLesson());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +56,12 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imageView;
+
         private TextView txt_nameCourse;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.image_view);
+
             txt_nameCourse = itemView.findViewById(R.id.title);
         }
     }

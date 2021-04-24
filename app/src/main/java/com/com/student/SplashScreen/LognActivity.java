@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,13 +25,15 @@ public class LognActivity extends AppCompatActivity {
 
     //find filed view..
     LottieAnimationView lottieAnimationView;
-    private EditText edt_email, edt_password ,mEdit_Name;
+    private EditText edt_email, edt_password, mEdit_Name;
     private ProgressBar progressBar;
     private Button btn_login;
+    private  String name ,email,password;
     //save_data
     ModelSaveData data_student;
     //firebase
     private FirebaseAuth firebaseAuth;
+    SharedPreferences sharedPreferences;
 
 
     @Override
@@ -38,24 +41,24 @@ public class LognActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logn);
 
-
         edt_email = findViewById(R.id.edt_email);
         edt_password = findViewById(R.id.edt_Password);
         btn_login = findViewById(R.id.btn_login);
         progressBar = findViewById(R.id.progressBar);
-        mEdit_Name=findViewById(R.id.edt_name);
+        mEdit_Name = findViewById(R.id.edt_name);
 
         //  Add Anmation
         lottieAnimationView = findViewById(R.id.lottie);
         lottieAnimationView.animate();
 
         //Save Data
-        ModelSaveData saveData=new ModelSaveData(this);
+        ModelSaveData saveData = new ModelSaveData(this);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
         Intent intent = new Intent(LognActivity.this, MainActivity.class);
         if (firebaseAuth.getCurrentUser() != null) {
+            sendData();
             startActivity(intent);
             finish();
 
@@ -79,15 +82,16 @@ public class LognActivity extends AppCompatActivity {
                     edt_password.setError(null);
                 }
                 progressBar.setVisibility(View.VISIBLE);
-                String Name=mEdit_Name.getText().toString();
-                String Email=edt_email.getText().toString();
-                String Password=edt_password.getText().toString();
-                firebaseAuth.signInWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+               name = mEdit_Name.getText().toString();
+                 email = edt_email.getText().toString();
+                 password = edt_password.getText().toString();
+                firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            String UserID=task.getResult().getUser().getUid();
-                            saveData.SaveData(Name,Email,UserID);
+                            String UserID = task.getResult().getUser().getUid();
+                            saveData.SaveData(name, email, UserID);
+                            sendData();
                             startActivity(intent);
                             finish();
                             Toast.makeText(LognActivity.this, "success", Toast.LENGTH_SHORT).show();
@@ -99,17 +103,15 @@ public class LognActivity extends AppCompatActivity {
                 });
             }
         });
+
     }
 
 
-    //method to save data
-    private void SaveData() {
-        String Name = edt_email.getText().toString();
-        String phone = edt_password.getText().toString();
-        //save in model
-
-
-        //save in firebase
+    public void sendData() {
+        sharedPreferences = getSharedPreferences("SHARD_PRE", MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("Name",name);
+        editor.apply();
+        editor.commit();
     }
-
 }
