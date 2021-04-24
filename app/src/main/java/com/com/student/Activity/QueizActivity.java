@@ -87,7 +87,6 @@ public class QueizActivity extends AppCompatActivity {
                         for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                             list.add(snapshot1.getValue(QuestionModel.class));
                         }
-
                         if (list.size() > 0) {
                             for (int i = 0; i < 4; i++) {
                                 optionsContainer.getChildAt(i).setOnClickListener(v ->
