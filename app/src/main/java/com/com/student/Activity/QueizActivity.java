@@ -115,6 +115,7 @@ public class QueizActivity extends AppCompatActivity {
                                     database.getReference().child("score")
                                             .child("nameLesson")
                                             .child(titleQuaiz)
+                                            .child(name)
                                             .setValue(map);
 
                                     startActivity(scoreIntent);
