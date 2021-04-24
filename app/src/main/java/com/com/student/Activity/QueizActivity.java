@@ -113,7 +113,7 @@ public class QueizActivity extends AppCompatActivity {
                                     map.put("score", score);
 
                                     database.getReference().child("score")
-                                            .child("titleLesson")
+                                            .child("nameLesson")
                                             .child(titleQuaiz)
                                             .setValue(map);
 

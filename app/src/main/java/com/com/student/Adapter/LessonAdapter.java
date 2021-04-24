@@ -39,14 +39,8 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.txt_nameCourse.setText(lessonModels.get(position).getNameLesson());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemLessonListener.onItemCourseClicked(lessonModels.get(position), position);
-            }
-        });
-
-
+        holder.itemView.setOnClickListener(v ->
+                itemLessonListener.onItemCourseClicked(lessonModels.get(position), position));
 
     }
 
